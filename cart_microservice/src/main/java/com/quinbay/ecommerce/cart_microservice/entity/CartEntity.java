@@ -15,20 +15,24 @@ public class CartEntity {
 
     private Long productId;
 
-    private Long userId,quantity;
+    private Long userId,quantity,sellerId;
 
-    public CartEntity( Long productId,  Long userId,  Long quantity) {
+    public CartEntity(Long productId, Long userId, Long quantity, Long sellerId) {
         this.productId = productId;
         this.userId = userId;
         this.quantity = quantity;
+        this.sellerId = sellerId;
     }
 
-    public CartEntity(Long cartId, Long productId,Long userId,  Long quantity) {
+    public CartEntity(Long cartId, Long productId, Long userId, Long quantity, Long sellerId) {
         this.cartId = cartId;
         this.productId = productId;
         this.userId = userId;
         this.quantity = quantity;
+        this.sellerId = sellerId;
     }
+
+    public CartEntity(){};
 
     public Long getCartId() {
         return cartId;
@@ -62,6 +66,11 @@ public class CartEntity {
         this.quantity = quantity;
     }
 
-    public CartEntity(){}
+    public Long getSellerId() {
+        return sellerId;
+    }
 
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
+    }
 }
