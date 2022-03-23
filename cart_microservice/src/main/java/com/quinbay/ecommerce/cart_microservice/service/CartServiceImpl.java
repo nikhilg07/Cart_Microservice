@@ -37,25 +37,25 @@ public class CartServiceImpl implements CartService{
 
 
     @Override
-    public void deleteProduct(Long userId,Long productId){
+    public void deleteProduct(Long userId,Long productId , Long sellerId){
 
         Iterable<CartEntity>cartList= cartRepository.findAll();
 
         for(CartEntity c:cartList){
-            if( (c.getUserId()==userId && c.getProductId()==productId ) ){
-                CartEntity cartEntity = new CartEntity(productId,userId,c.getQuantity());
-                cartRepository.delete(cartEntity);
-                break;
+            if( (c.getUserId()==userId && c.getProductId()==productId ) && c.getSellerId()==sellerId   )  {
+                    cartRepository.delete(c);
+                }
+
             }
         }
 
 
-    }
+
 
 
     @Override
-    public void addProduct(Long cartId,Long userId,Long productId) {
-        Optional<CartEntity> optionalCartEntity = cartRepository.findByUserIdAndProductId(userId, productId);
+    public void addProduct(Long cartId,Long userId,Long productId , Long sellerId) {
+        Optional<CartEntity> optionalCartEntity = cartRepository.findByUserIdAndProductIdAndSellerId(userId, productId,sellerId);
         if(optionalCartEntity.isPresent()) {
             CartEntity cartEntity = optionalCartEntity.get();
             cartEntity.setQuantity(cartEntity.getQuantity()+1);
@@ -63,7 +63,7 @@ public class CartServiceImpl implements CartService{
 
         }
         else {
-            CartEntity cartEntity1=new CartEntity(productId,userId,1L);
+            CartEntity cartEntity1=new CartEntity(productId,userId,1L,sellerId);
             cartRepository.save(cartEntity1);
         }
 
