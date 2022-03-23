@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CartRepository extends CrudRepository<CartEntity,Long> {
 
-    Optional<CartEntity> findByUserIdAndProductId(Long userId, Long productId);
+    Optional<CartEntity> findByUserIdAndProductIdAndSellerId(Long userId, Long productId,Long sellerId);
 
 }
