@@ -10,15 +10,15 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-    @DeleteMapping(value = "/productDelete" , produces = "application/json")
-    public void delete(@RequestParam Long userId,@RequestParam Long productId){
-        cartService.deleteProduct(userId,productId);
+    @DeleteMapping(value = "/productDelete" , consumes = "application/json")
+    public void delete(@RequestParam Long userId,@RequestParam Long productId,@RequestParam Long sellerId){
+        cartService.deleteProduct(userId,productId,sellerId);
     }
 
 
-    @PostMapping(value = "/addProduct",produces = "application/json")
-    public void add(@RequestParam Long cartId ,@RequestParam Long userId,@RequestParam Long productId){
-        cartService.addProduct(cartId,userId,productId);
+    @PostMapping(value = "/addProduct", consumes ="application/json")
+    public void add(@RequestParam Long cartId ,@RequestParam Long userId,@RequestParam Long productId,@RequestParam Long sellerId){
+        cartService.addProduct(cartId,userId,productId,sellerId);
     }
 
 
@@ -26,31 +26,5 @@ public class CartController {
 }
 
 
-/*
-
-@RestController
-
-public class UserController {
-
-    @Autowired
-    UserService userService;
-
-    @PostMapping(value = "/addUser" , consumes = "application/json")
-    public void addUser(@RequestBody @Valid User user)
-    {
-        userService.addUser(user);
-    }
-
-    @GetMapping(value = "/user" , produces = "application/json")
-    public List<User> getStudents(){
-
-        return userService.getAllUsers();
-    }
 
 
-}
-
-
-
-
- */
